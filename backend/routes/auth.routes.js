@@ -1,9 +1,11 @@
 import express from "express";
-import authentication from '../controllers/auth'  
-const router = express.Router() 
-require('dotenv').config();   
+import authentication from '../controllers/auth'
+const router = express.Router()
+require('dotenv').config();
 
 // store donor data in elephantsql
-router.post('/donorform', authentication.donorform) ;
+// router.post('/donorform', authentication.donorform);
+router.get('/data', authentication.donorform);
+
 
 module.exports = router;

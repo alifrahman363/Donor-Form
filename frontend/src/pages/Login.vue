@@ -63,7 +63,29 @@ export default {
     MainFooter,
     [Button.name]: Button,
     [FormGroupInput.name]: FormGroupInput
-  }
+  },
+  data() {
+    return {
+      data: [],
+    };
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      // this.axios
+      //   .get('/api/data') // This URL should match the server route
+        const res = this.axios.get('/data')
+        .then((response) => {
+          this.data = response.data;
+          console.log('working',res);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    },
+  },
 };
 </script>
 <style></style>
