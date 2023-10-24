@@ -24,15 +24,12 @@ authentication.donorform = async (req, res) => {
     }
 }
 
-authentication.getData = async (req, res) => {
-    try {
-        // Fetch your data from an external API or a database
-        const response = await axios.get('https://api.example.com/data');
-        const data = response.data;
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data' });
-    }
+authentication.data = async (req, res) => {
+
+    res.status(200).json({
+        message: 'Successfully registered',
+    })
+
 }
 
 module.exports = authentication
