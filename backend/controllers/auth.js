@@ -25,11 +25,22 @@ authentication.donorform = async (req, res) => {
 }
 
 authentication.data = async (req, res) => {
+    console.log('printing data to be saved', req.body);
+    const { fname, lname, email } = req.body;
 
-    res.status(200).json({
-        message: 'Successfully registered',
-    })
+    try {
+        await pool.query('INSERT INTO signup(fname, lname, email) VALUES ($1, $2, $3)',
+            [fname, lname, email])
 
+        res.status(200).json({
+            message: 'Successfully registered',
+            student: { fname, lname, email }
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'An error has occured in authentication.donorform method', error
+        })
+    }
 }
 
 module.exports = authentication

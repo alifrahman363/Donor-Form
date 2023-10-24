@@ -1,12 +1,20 @@
 import { Pool } from "pg";
 
 const pool = new Pool({
-    host: 'batyr.db.elephantsql.com',
-    port: '5432',
-    user: 'dqorchfx',
-    password: 'bnnFT1H_58Gn_JXCC5okPUUIVupU_e4l',
-    database: 'dqorchfx'
-})
+    user: 'postgres',
+    password: '123',
+    host: 'localhost',
+    port: 5432,
+    database: 'pevn',
+});
+
+// const pool = new Pool({
+//     host: 'batyr.db.elephantsql.com',
+//     port: '5432',
+//     user: 'dqorchfx',
+//     password: 'bnnFT1H_58Gn_JXCC5okPUUIVupU_e4l',
+//     database: 'dqorchfx'
+// })
 
 
 // import { Pool } from "pg"; 

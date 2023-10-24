@@ -5,7 +5,9 @@ require('dotenv').config();
 
 // store donor data in elephantsql
 // router.post('/donorform', authentication.donorform);
-router.get('/data', authentication.data);
+
+
+router.post('/data', authentication.data);
 
 // router.get('/data', async (req, res) => {
 //     // const query = 'testinggg connection';
