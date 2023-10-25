@@ -46,12 +46,15 @@ export default {
               <fg-input class="no-border" placeholder="District" v-model="donor.donorDistrict" addon-left-icon="now-ui-icons ui-1_email-85"></fg-input> 
 
               <fg-input class="no-border" placeholder="Division" v-model="donor.donorDivision" addon-left-icon="now-ui-icons ui-1_email-85"></fg-input>
+              
+              <fg-input class="no-border" placeholder="Blood Group" v-model="donor.donorBloodGroup" addon-left-icon="now-ui-icons ui-1_email-85"></fg-input>
+
             </template>
 
           <div class="card-footer text-center">
             <!-- <n-button type="neutral" round size="lg">Get Started</n-button> -->
             <v-btn type="submit">
-              <n-button @click="donorForm()" type="submit" round size="lg">Register</n-button>
+              <n-button @click="donorform()" type="submit" round size="lg">Register</n-button>
             </v-btn>
             <!-- <n-button @click="clickButton()" type="submit" round size="lg">Get Started with Sign Up</n-button> -->
           </div>
@@ -92,33 +95,40 @@ export default {
     };
   },
   methods: {  
+    // async donorform(){
+    //   console.log('entered');
+    //     let valid = this.$refs.donorForm.validate()
+    //     console.log(this.donor) 
+
+    //     if (valid) {
+    //       try {      
+    //         const res = await this.axios.post('/donorform', this.donor)
+    //         this.$refs.donorForm.reset()
+    //         console.log(res)
+    //         console.log('successfully registered');
+
+    //         // this.donorAlert = {
+    //         //   showDonor: true, 
+    //         //   type:"success",
+    //         //   message: res.data.message
+    //         // } 
+    //       } catch (error) {
+    //         // this.donorAlert ={
+    //         //   showDonor: true, 
+    //         //   type: 'error',
+    //         //   message: error.response.data.message
+    //         // }
+    //         console.log(error);
+    //       }
+    //     }  
+    //   }
+
     async donorform(){
-      console.log('entered');
-        let valid = this.$refs.donorForm.validate()
-        console.log(this.donor) 
-
-        if (valid) {
-          try {      
-            const res = await this.axios.post('/donorform', this.donor)
-            this.$refs.donorForm.reset()
-            console.log(res)
-            console.log('successfully registered');
-
-            // this.donorAlert = {
-            //   showDonor: true, 
-            //   type:"success",
-            //   message: res.data.message
-            // } 
-          } catch (error) {
-            // this.donorAlert ={
-            //   showDonor: true, 
-            //   type: 'error',
-            //   message: error.response.data.message
-            // }
-            console.log(error);
-          }
-        }  
-      }
+      console.log('just prints');
+      console.log(this.donor);
+      const res = await this.axios.post('/donorform', this.donor)
+      console.log('printing result: ', res);
+    }
   },
 };
 </script>

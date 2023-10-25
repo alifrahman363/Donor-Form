@@ -35,7 +35,7 @@ authentication.donorform = async (req, res) => {
 
         res.status(200).json({
             message: 'Successfully registered',
-            student: { donorFname, donorGender, donorDoB, donorZip, donorCity, donorDistrict, donorDivision, donorBloodGroup }
+            Donor: { donorFname, donorGender, donorDoB, donorZip, donorCity, donorDistrict, donorDivision, donorBloodGroup }
         })
     } catch (error) {
         res.status(500).json({
