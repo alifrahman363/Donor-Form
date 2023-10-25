@@ -1,12 +1,12 @@
-import { Pool } from "pg";
+// import { Pool } from "pg";
 
-const pool = new Pool({
-    user: 'postgres',
-    password: '123',
-    host: 'localhost',
-    port: 5432,
-    database: 'pevn',
-});
+// const pool = new Pool({
+//     user: 'postgres',
+//     password: '123',
+//     host: 'localhost',
+//     port: 5432,
+//     database: 'pevn',
+// });
 
 // const pool = new Pool({
 //     host: 'batyr.db.elephantsql.com',
@@ -17,16 +17,16 @@ const pool = new Pool({
 // })
 
 
-// import { Pool } from "pg"; 
-// require('dotenv').config(); 
+import { Pool } from "pg";
+require('dotenv').config();
 
-// const pool = new Pool({
-//     user: process.env.PGUSER,
-//     host: process.env.PGHOST,
-//     database: process.env.PGDATABASE,
-//     password: process.env.PGPASSWORD,
-//     port: process.env.PGPORT,
+const pool = new Pool({
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
 
-// })
+})
 
 module.exports = pool;
