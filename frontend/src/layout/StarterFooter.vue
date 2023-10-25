@@ -9,7 +9,7 @@
         <ul>
           <li>
             <a href="https://www.creative-tim.com">
-              Creative Tim
+              LegoIO
             </a>
           </li>
           <li>
@@ -32,10 +32,10 @@
       <div class="copyright">
         &copy; {{ year }}, Designed by
         <a href="https:///www.invisionapp.com" target="_blank" rel="noopener"
-          >Invision</a
+          >LegoIO</a
         >. Coded by
         <a href="https://binarcode.com" target="_blank" rel="noopener"
-          >BinarCode</a
+          >Alif Rahman</a
         >
         and
         <a href="https://www.creative-tim.com" target="_blank" rel="noopener"

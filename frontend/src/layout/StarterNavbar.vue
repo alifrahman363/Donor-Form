@@ -1,8 +1,9 @@
 <template>
   <navbar position="fixed" type="primary" menu-classes="ml-auto">
-    <template slot-scope="{ toggle, isToggled }">
+    <!-- <template slot-scope="{ toggle, isToggled }"> -->
+    <template slot-scope="">
       <router-link v-popover:popover1 class="navbar-brand" to="/presentation">
-        My Site Name
+        Blood Donor
       </router-link>
       <el-popover
         ref="popover1"
@@ -12,14 +13,14 @@
         trigger="hover"
       >
         <div class="popover-body">
-          Designed by Invision. Coded by Creative Tim
+          Designed by LegoIO. Coded by Alif Rahman
         </div>
-      </el-popover>
+      </el-popover> 
     </template>
     <template slot="navbar-menu">
-      <drop-down tag="li" title="Sample Dropdown">
+      <drop-down tag="li" title="Menu">
         <nav-link class="dropdown-item">
-          <i class="now-ui-icons shopping_box"></i> Headers
+          <i class="now-ui-icons shopping_box"></i> Login
         </nav-link>
       </drop-down>
     </template>
@@ -35,7 +36,7 @@ export default {
   components: {
     DropDown,
     Navbar,
-    NavbarToggleButton,
+    // NavbarToggleButton,
     NavLink,
     [Popover.name]: Popover
   }

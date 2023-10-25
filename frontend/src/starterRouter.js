@@ -3,10 +3,12 @@ import Router from 'vue-router';
 import Starter from './pages/StarterPage.vue';
 import StarterNavbar from './layout/StarterNavbar.vue';
 import StarterFooter from './layout/StarterFooter.vue';
+import MainNaver from './layout/MainNavbar.vue'
 
 Vue.use(Router);
 
 export default new Router({
+  linkExactActiveClass: 'active',
   routes: [
     {
       path: '/',
