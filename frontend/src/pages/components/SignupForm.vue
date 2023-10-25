@@ -30,7 +30,7 @@
             </div>
           </template>
 
-          <v-form @submit.prevent="signup()" ref="signupForm">
+          <v-form ref="signupForm">
           <template>
             <fg-input
               v-model="formData.fname"
@@ -103,7 +103,7 @@ export default {
       console.log('clicked');
     },
     async handleSignup() {
-      console.log('clicked');
+      console.log('clickeddddd');
       try {      
         const res = await this.axios.post('/data', this.formData)
         // this.$refs.donorForm.reset()

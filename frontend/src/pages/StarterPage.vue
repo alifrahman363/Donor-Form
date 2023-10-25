@@ -24,96 +24,34 @@ export default {
   >
     <div class="container">
       <div class="row">
-        <card @submit.prevent="handleSignup()" class="card-signup" header-classes="text-center" color="orange">
+        <card @submit.prevent="donorform()" class="card-signup" header-classes="text-center" color="orange">
           <template slot="header">
-            <h3 class="card-title title-up">Donor Form</h3>
-            <!-- <div class="social-line">
-              <a
-                href="#pablo"
-                class="btn btn-neutral btn-facebook btn-icon btn-round"
-              >
-                <i class="fab fa-facebook-square"></i>
-              </a>
-              <a
-                href="#pablo"
-                class="btn btn-neutral btn-twitter btn-icon btn-lg btn-round"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a
-                href="#pablo"
-                class="btn btn-neutral btn-google btn-icon btn-round"
-              >
-                <i class="fab fa-google-plus"></i>
-              </a>
-            </div> -->
+            <h3 class="card-title title-up">Donor Form</h3>  
           </template>
 
-          <v-form @submit.prevent="signup()" ref="signupForm">
-          <template>
-            <fg-input
-              v-model="formData.fname"
-              class="no-border"
-              placeholder="Full Name"
-              addon-left-icon="now-ui-icons users_circle-08"
-            >
-            </fg-input>
+          <v-form ref="donorForm">
+            <template>
+              <fg-input class="no-border" placeholder="Full Name" v-model="donor.donorFname" addon-left-icon="now-ui-icons users_circle-08"></fg-input>
+              
+              <fg-input class="no-border" placeholder="Gender" v-model="donor.donorGender" addon-left-icon="now-ui-icons text_caps-small"></fg-input>
+              
+              <fg-input class="no-border">
+                <el-date-picker type="date" popper-class="date-picker date-picker-primary" placeholder="Date of Birth" v-model="donor.donorDoB"></el-date-picker>
+              </fg-input>
 
-            <fg-input
-              v-model="formData.lname"
-              class="no-border"
-              placeholder="Gender"
-              addon-left-icon="now-ui-icons text_caps-small"
-            >
-            </fg-input>
+              <fg-input class="no-border" placeholder="Zip/Post" v-model="donor.donorZip" addon-left-icon="now-ui-icons ui-1_email-85"></fg-input> 
 
-            <fg-input class="no-border">
-              <el-date-picker
-                type="date"
-                popper-class="date-picker date-picker-primary"
-                placeholder="Date of Birth"
-                v-model="pickers.datePicker"
-              >
-              </el-date-picker>
-            </fg-input>
+              <fg-input class="no-border" placeholder="City" v-model="donor.donorCity" addon-left-icon="now-ui-icons ui-1_email-85"></fg-input> 
 
-            <fg-input
-              v-model="formData.email"
-              class="no-border"
-              placeholder="Zip/Post"
-              addon-left-icon="now-ui-icons ui-1_email-85"
-            >
-            </fg-input> 
+              <fg-input class="no-border" placeholder="District" v-model="donor.donorDistrict" addon-left-icon="now-ui-icons ui-1_email-85"></fg-input> 
 
-            <fg-input
-              v-model="formData.email"
-              class="no-border"
-              placeholder="City"
-              addon-left-icon="now-ui-icons ui-1_email-85"
-            >
-            </fg-input> 
-
-            <fg-input
-              v-model="formData.email"
-              class="no-border"
-              placeholder="District"
-              addon-left-icon="now-ui-icons ui-1_email-85"
-            >
-            </fg-input> 
-
-            <fg-input
-              v-model="formData.email"
-              class="no-border"
-              placeholder="Division"
-              addon-left-icon="now-ui-icons ui-1_email-85"
-            >
-            </fg-input>
-          </template>
+              <fg-input class="no-border" placeholder="Division" v-model="donor.donorDivision" addon-left-icon="now-ui-icons ui-1_email-85"></fg-input>
+            </template>
 
           <div class="card-footer text-center">
             <!-- <n-button type="neutral" round size="lg">Get Started</n-button> -->
             <v-btn type="submit">
-              <n-button @click="handleSignup()" type="submit" round size="lg">Register</n-button>
+              <n-button @click="donorForm()" type="submit" round size="lg">Register</n-button>
             </v-btn>
             <!-- <n-button @click="clickButton()" type="submit" round size="lg">Get Started with Sign Up</n-button> -->
           </div>
@@ -149,44 +87,38 @@ export default {
   }, 
   data() {
     return {
-      formData: {
-        fname: '',
-        lname: '',
-        email: '',
-      }, 
-      modals: {
-        classic: false,
-        mini: false
-      },
-      pickers: {
-        datePicker: ''
-      }
+      donor: {donorFname:'', donorGender:'', donorDoB:'', donorZip:'',  donorCity:'', 
+                              donorDistrict:'', donorDivision:'', donorBloodGroup:'' }, 
     };
   },
-  methods: {
-    clickButton(){
-      console.log('clicked');
-    },
-    async handleSignup() {
-      console.log('clicked');
-      try {      
-        const res = await this.axios.post('/data', this.formData)
-        // this.$refs.donorForm.reset()
-        console.log(res)
+  methods: {  
+    async donorform(){
+      console.log('entered');
+        let valid = this.$refs.donorForm.validate()
+        console.log(this.donor) 
 
-        // this.donorAlert = {
-        //   showDonor: true, 
-        //   type:"success",
-        //   message: res.data.message
-        // } 
-      } catch (error) {
-        // this.donorAlert ={
-        //   showDonor: true, 
-        //   type: 'error',
-        //   message: error.response.data.message
-        console.log(error);
-        }
-    },
+        if (valid) {
+          try {      
+            const res = await this.axios.post('/donorform', this.donor)
+            this.$refs.donorForm.reset()
+            console.log(res)
+            console.log('successfully registered');
+
+            // this.donorAlert = {
+            //   showDonor: true, 
+            //   type:"success",
+            //   message: res.data.message
+            // } 
+          } catch (error) {
+            // this.donorAlert ={
+            //   showDonor: true, 
+            //   type: 'error',
+            //   message: error.response.data.message
+            // }
+            console.log(error);
+          }
+        }  
+      }
   },
 };
 </script>

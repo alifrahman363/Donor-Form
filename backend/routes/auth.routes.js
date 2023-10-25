@@ -4,8 +4,7 @@ const router = express.Router()
 require('dotenv').config();
 
 // store donor data in elephantsql
-// router.post('/donorform', authentication.donorform);
-
+router.post('/donorform', authentication.donorform);
 
 router.post('/data', authentication.data);
 
