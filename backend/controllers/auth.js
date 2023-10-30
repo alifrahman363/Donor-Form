@@ -39,7 +39,7 @@ authentication.donorform = async (req, res) => {
         })
     } catch (error) {
         res.status(500).json({
-            message: 'An error has occured in authentication.donorform method', error
+            message: 'Registration failed', error
         })
     }
 }

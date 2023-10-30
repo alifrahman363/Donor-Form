@@ -1,38 +1,26 @@
-<!-- <template>
-  <div class="starter-page">
-    <div class="section text-center">
-      <h3>Create your next awesome website</h3>
-    </div>
-  </div>
-</template>
-<script>
-export default {
-  name: 'starter'
-};
-</script>
-<style>
-.starter-page {
-  min-height: calc(100vh - 95px);
-}
-</style> -->
-
-
 <template>
   <div
     class="section section-signup"
     style="background-image: url('img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px;"
   >
-    <div class="container">
+    <!-- add this -->
+    <div>         
+      <alert v-model="alert.show" :type="alert.type" dismissables >
+        {{alert.message}}
+      </alert>
+    </div>
+    
+    <div class="container">  
       <div class="row">
-        <card @submit.prevent="donorform()" class="card-signup" header-classes="text-center" color="orange">
+        <card class="card-signup" header-classes="text-center" color="orange">
           <template slot="header">
             <h3 class="card-title title-up">Donor Form</h3>  
           </template>
-
+          
           <v-form ref="donorForm">
             <template>
-              <fg-input class="no-border" placeholder="Full Name" v-model="donor.donorFname" addon-left-icon="now-ui-icons users_circle-08"></fg-input>
-              
+              <fg-input class="no-border" placeholder="Full Name" v-model="donor.donorFname" addon-left-icon="now-ui-icons users_circle-08"></fg-input> 
+
               <fg-input class="no-border" placeholder="Gender" v-model="donor.donorGender" addon-left-icon="now-ui-icons text_caps-small"></fg-input>
               
               <fg-input class="no-border">
@@ -51,12 +39,10 @@ export default {
 
             </template>
 
-          <div class="card-footer text-center">
-            <!-- <n-button type="neutral" round size="lg">Get Started</n-button> -->
+          <div class="card-footer text-center"> 
             <v-btn type="submit">
               <n-button @click="donorform()" type="submit" round size="lg">Register</n-button>
-            </v-btn>
-            <!-- <n-button @click="clickButton()" type="submit" round size="lg">Get Started with Sign Up</n-button> -->
+            </v-btn> 
           </div>
 
         </v-form>
@@ -78,10 +64,13 @@ export default {
 
 import { Card, FormGroupInput, Button } from '@/components';
 import { Popover, Tooltip, DatePicker } from 'element-ui';
+import { Alert } from '@/components'; //add this
+
 export default {
   components: {
     // Modal, 
     Card,
+    Alert, //add this
     [Popover.name]: Popover,
     [Tooltip.name]: Tooltip,
     [DatePicker.name]: DatePicker, 
@@ -92,44 +81,35 @@ export default {
     return {
       donor: {donorFname:'', donorGender:'', donorDoB:'', donorZip:'',  donorCity:'', 
                               donorDistrict:'', donorDivision:'', donorBloodGroup:'' }, 
+      
+      alert:{             //add this
+        show: false , 
+        message: '' 
+      },  
     };
   },
-  methods: {  
-    // async donorform(){
-    //   console.log('entered');
-    //     let valid = this.$refs.donorForm.validate()
-    //     console.log(this.donor) 
-
-    //     if (valid) {
-    //       try {      
-    //         const res = await this.axios.post('/donorform', this.donor)
-    //         this.$refs.donorForm.reset()
-    //         console.log(res)
-    //         console.log('successfully registered');
-
-    //         // this.donorAlert = {
-    //         //   showDonor: true, 
-    //         //   type:"success",
-    //         //   message: res.data.message
-    //         // } 
-    //       } catch (error) {
-    //         // this.donorAlert ={
-    //         //   showDonor: true, 
-    //         //   type: 'error',
-    //         //   message: error.response.data.message
-    //         // }
-    //         console.log(error);
-    //       }
-    //     }  
-    //   }
-
-    async donorform(){
-      console.log('just prints');
-      console.log(this.donor);
-      const res = await this.axios.post('/donorform', this.donor)
-      console.log('printing result: ', res);
-    }
-  },
+  methods: {    
+    //refactored
+    async donorform(){ 
+      validateFname(this.donor.donorFname)
+      try {
+        const res = await this.axios.post('/donorform', this.donor)
+        console.log('printing result: ', res.data.message);
+        console.log('data: ', res);
+        this.alert = {
+        show: true, 
+        type:"success",
+        message: res.data.message
+       } 
+       } catch (error) {
+         this.alert ={
+           show: true, 
+           type: 'danger',
+           message: error.response.data.message
+         }
+       }
+      },
+  },  
 };
 </script>
 <!-- <style></style> -->
